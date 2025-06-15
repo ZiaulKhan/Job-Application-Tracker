@@ -1,2 +1,33 @@
-node_modules
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# dotenv environment files
 .env
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Build output
+dist/
+build/
+
+# Debug
+*.local
+*.sublime-workspace
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Render/Deploy-specific
+render.yaml
