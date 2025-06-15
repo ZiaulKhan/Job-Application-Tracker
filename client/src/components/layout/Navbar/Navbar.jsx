@@ -4,14 +4,14 @@ import ThemeToggle from "../../shared/ThemeToggle/ThemeToggle";
 import { SiPivotaltracker } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
-import { FaAngleDown, FaBars } from "react-icons/fa6";
+import { FaBars } from "react-icons/fa6";
 import { BiLogOutCircle } from "react-icons/bi";
 import { useToast } from "../../../context/ToastContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { showToast } = useToast();
-  const { user, token, dispatch } = useAuth();
+  const { token, dispatch } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
