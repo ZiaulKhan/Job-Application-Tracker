@@ -11,7 +11,6 @@ const JobAppModal = ({
   selectedJobAppCompany,
   handleDelete,
 }) => {
-  console.log("Hello modal");
   return (
     <Modal
       title={

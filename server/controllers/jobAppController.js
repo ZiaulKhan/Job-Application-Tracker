@@ -2,7 +2,7 @@ const JobApp = require("../models/JobApp");
 
 exports.getJobApps = async (req, res) => {
   try {
-    const { status, search, sort, page = 1, limit = 3 } = req.query;
+    const { status, search, sort, page = 1, limit = 10 } = req.query;
     let query = { userId: req.userId, isDeleted: false };
 
     if (status && status !== "all") query.status = status.toLowerCase();
@@ -86,5 +86,30 @@ exports.deleteJobApp = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to delete job application" });
+  }
+};
+
+exports.getJobSummary = async (req, res) => {
+  const userId = req.userId;
+  try {
+    const jobs = await JobApp.find({ userId: userId, isDeleted: false });
+
+    const summary = {
+      total: jobs.length,
+      applied: 0,
+      interview: 0,
+      rejected: 0,
+      offer: 0,
+    };
+
+    jobs.forEach((job) => {
+      if (summary[job.status] !== undefined) {
+        summary[job.status]++;
+      }
+    });
+
+    res.status(200).json(summary);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch summary" });
   }
 };

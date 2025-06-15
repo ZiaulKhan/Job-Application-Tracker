@@ -15,3 +15,7 @@ export const updateJobApp = (id, payload) => {
 export const deleteJobApp = (id) => {
   return apiClient.delete(`/job-apps/${id}`);
 };
+
+export const getJobSummary = () => {
+  return apiClient.get("/job-apps/summary");
+};

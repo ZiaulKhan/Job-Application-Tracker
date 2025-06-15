@@ -16,8 +16,8 @@ const JobFilters = ({
       >
         <option value="all">All</option>
         <option value="applied">Applied</option>
-        <option value="interview">Interview</option>
-        <option value="offer">Offer</option>
+        <option value="interview">Interview Scheduled</option>
+        <option value="offer">Offer Received</option>
         <option value="rejected">Rejected</option>
       </select>
 

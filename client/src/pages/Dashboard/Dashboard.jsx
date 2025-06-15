@@ -17,6 +17,7 @@ import { formatDateForInput } from "../../utils/helpers";
 import JobAppModal from "../../components/job-apps/JobAppModal";
 import Loader from "../../components/shared/Loader/Loader";
 import { useToast } from "../../context/ToastContext";
+import Summary from "../../components/Dashboard/Summary/Summary";
 
 const Dashboard = () => {
   const form = useForm({
@@ -150,6 +151,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard container">
+      <Summary />
       <div className="dashboard-header flex-between">
         <JobFilters
           statusFilter={statusFilter}
@@ -174,7 +176,6 @@ const Dashboard = () => {
           setModalType={setModalType}
         />
       )}
-
       <JobAppModal
         modalType={modalType}
         handleCloseModal={handleCloseModal}

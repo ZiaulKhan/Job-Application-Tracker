@@ -3,8 +3,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
-  margin: 3rem auto;
+  gap: 1.2rem;
+  height: 100%;
+  padding: 2rem 1rem; /* Add padding for mobile spacing */
 }
 
 .auth-container {
@@ -16,16 +17,18 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-.auth-form .btn {
-  width: 100%;
-  margin-top: 1.6rem !important;
-}
-
+/* Adjust font size for smaller screens */
 .auth-title {
   font-size: 1.8rem;
   font-weight: 600;
   margin-bottom: 1.2rem;
   line-height: 1;
+  text-align: center;
+}
+
+.auth-form .btn {
+  width: 100%;
+  margin-top: 1.6rem !important;
 }
 
 .auth-footer {
@@ -33,14 +36,41 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
+  text-align: center;
 }
 
 .auth-footer-btn {
   color: var(--btn-bg);
   font-weight: 600;
   text-decoration: none;
+}
 
-  &:hover {
-    color: var(--btn-hover-bg);
+.auth-footer-btn:hover {
+  color: var(--btn-hover-bg);
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .auth-container-wrapper {
+    padding: 2rem 1rem;
+  }
+
+  .auth-container {
+    padding: 1.5rem;
+  }
+
+  .auth-title {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-title {
+    font-size: 1.4rem;
+  }
+
+  .auth-container {
+    padding: 1.2rem;
   }
 }

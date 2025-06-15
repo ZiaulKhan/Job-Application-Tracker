@@ -9,6 +9,7 @@ import Footer from "./components/layout/Footer/Footer";
 import { useEffect } from "react";
 import { ToastProvider } from "./context/ToastContext";
 import "./styles/toast.css";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   useEffect(() => {
@@ -19,8 +20,8 @@ function App() {
   return (
     <AuthProvider>
       <ToastProvider>
-        <div className="layout-container">
-          <Router>
+        <Router>
+          <div className="layout-container">
             <Navbar />
             <div className="app-container">
               <Routes>
@@ -46,11 +47,12 @@ function App() {
                     <ProtectedRoute>{/* <EditJobPage /> */}</ProtectedRoute>
                   }
                 />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
             <Footer />
-          </Router>
-        </div>
+          </div>
+        </Router>
       </ToastProvider>
     </AuthProvider>
   );

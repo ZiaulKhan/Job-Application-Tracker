@@ -40,8 +40,8 @@ const JobAppForm = ({ form, onSubmit, isSubmitting, onClose }) => {
         form={form}
         options={[
           { value: "applied", label: "Applied" },
-          { value: "interview", label: "Interview" },
-          { value: "offer", label: "Offer" },
+          { value: "interview", label: "Interview Scheduled" },
+          { value: "offer", label: "Offer Received" },
           { value: "rejected", label: "Rejected" },
         ]}
       />

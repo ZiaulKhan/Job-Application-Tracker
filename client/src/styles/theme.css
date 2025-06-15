@@ -15,6 +15,8 @@
   --btn-cancel-bg: #e0e0e0;
   --btn-cancel-hover-bg: #e0e0e0;
   --modal-backdrop-bg: rgba(0, 0, 0, 0.505);
+  --circle-color: rgba(137, 137, 137, 0.124);
+  --summary-text: rgb(83, 83, 83);
 }
 
 [data-theme="dark"] {
@@ -34,4 +36,6 @@
   --btn-cancel-bg: #2a2a2a;
   --btn-cancel-hover-bg: #3a3a3a;
   --modal-backdrop-bg: rgba(0, 0, 0, 0.64);
+  --circle-color: rgba(255, 255, 255, 0.1);
+  --summary-text: rgb(255, 255, 255);
 }

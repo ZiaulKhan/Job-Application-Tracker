@@ -1,33 +1,13 @@
-# Node modules
+# Common
 node_modules/
-
-# Logs
-logs
-*.log
-npm-debug.log*
-
-# dotenv environment files
 .env
-
-# OS-specific
-.DS_Store
-Thumbs.db
-
-# IDEs
-.vscode/
-.idea/
-
-# Build output
 dist/
 build/
+.DS_Store
 
-# Debug
-*.local
-*.sublime-workspace
+# Client
+client/node_modules
+client/build
 
-# Coverage reports
-coverage/
-.nyc_output/
-
-# Render/Deploy-specific
-render.yaml
+# Server
+server/node_modules
