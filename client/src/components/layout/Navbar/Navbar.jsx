@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import ThemeToggle from "../../shared/ThemeToggle/ThemeToggle";
 import { SiPivotaltracker } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
-import { FaAngleDown } from "react-icons/fa6";
+import { FaAngleDown, FaBars } from "react-icons/fa6";
 import { BiLogOutCircle } from "react-icons/bi";
 import { useToast } from "../../../context/ToastContext";
 
@@ -12,16 +12,20 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { showToast } = useToast();
   const { user, token, dispatch } = useAuth();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const handleLogout = () => {
-    try {
-      dispatch({ type: "LOGOUT" });
-      navigate("/login");
-      showToast("Logged out");
-    } catch (err) {
-      showToast("Error logging out", "error");
-    }
+    dispatch({ type: "LOGOUT" });
+    navigate("/login");
+    showToast("Logged out");
   };
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div className="navbar">
@@ -29,22 +33,41 @@ const Navbar = () => {
         <SiPivotaltracker className="navbar-icon" />
         Job Application Tracker
       </p>
+
       <div className="navbar-right">
-        {token && (
-          <div className="navbar-user">
-            <p className="navbar-user-name">
-              <FaAngleDown className="navbar-user-icon" />
-              Hello, {user?.name?.split(" ")[0] || "User"}
+        {isMobile && (
+          <FaBars
+            className="hamburger"
+            onClick={() => setShowDropdown((prev) => !prev)}
+          />
+        )}
+
+        {!isMobile && token && (
+          <>
+            <p className="navbar-logout" onClick={handleLogout}>
+              <BiLogOutCircle /> Logout
             </p>
-            <div className="navbar-user-dropdown">
-              <p className="navbar-user-dropdown-item" onClick={handleLogout}>
+            <ThemeToggle />
+          </>
+        )}
+      </div>
+
+      {isMobile && showDropdown && (
+        <>
+          <div
+            className="navbar-backdrop"
+            onClick={() => setShowDropdown(false)}
+          />
+          <div className="navbar-mobile-dropdown">
+            {token && (
+              <p className="navbar-logout" onClick={handleLogout}>
                 <BiLogOutCircle /> Logout
               </p>
-            </div>
+            )}
+            <ThemeToggle />
           </div>
-        )}
-        <ThemeToggle />
-      </div>
+        </>
+      )}
     </div>
   );
 };

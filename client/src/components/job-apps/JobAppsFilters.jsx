@@ -9,26 +9,28 @@ const JobFilters = ({
 }) => {
   return (
     <div className="filter-group">
-      <select
-        value={statusFilter}
-        onChange={(e) => updateParam("status", e.target.value)}
-        className="filter-select"
-      >
-        <option value="all">All</option>
-        <option value="applied">Applied</option>
-        <option value="interview">Interview Scheduled</option>
-        <option value="offer">Offer Received</option>
-        <option value="rejected">Rejected</option>
-      </select>
+      <div className="filter-group-left">
+        <select
+          value={statusFilter}
+          onChange={(e) => updateParam("status", e.target.value)}
+          className="filter-select"
+        >
+          <option value="all">All</option>
+          <option value="applied">Applied</option>
+          <option value="interview">Interview Scheduled</option>
+          <option value="offer">Offer Received</option>
+          <option value="rejected">Rejected</option>
+        </select>
 
-      <select
-        value={sortOption}
-        onChange={(e) => updateParam("sort", e.target.value)}
-        className="filter-select"
-      >
-        <option value="latest">Latest</option>
-        <option value="oldest">Oldest</option>
-      </select>
+        <select
+          value={sortOption}
+          onChange={(e) => updateParam("sort", e.target.value)}
+          className="filter-select"
+        >
+          <option value="latest">Latest</option>
+          <option value="oldest">Oldest</option>
+        </select>
+      </div>
 
       <input
         className="filter-select search-input"

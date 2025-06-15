@@ -1,5 +1,5 @@
 .navbar {
-  padding: 0.8rem 1.5rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,86 +11,43 @@
   background-color: var(--navbar-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-
-  @media (max-width: 768px) {
-    padding: 0.6rem 0.5rem;
-  }
 }
 
 .navbar-icon {
   font-size: 1.6rem;
-  @media (max-width: 768px) {
-    font-size: 1.4rem;
-  }
 }
 
 .navbar-title {
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.01rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  @media (max-width: 768px) {
-    font-size: 1.3rem;
-    gap: 0.2rem;
-  }
 }
 
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
-.navbar-user {
-  /* display: flex; */
-  /* align-items: center; */
-  /* gap: 0.5rem; */
-  position: relative;
-}
-
-.navbar-user-name {
-  cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: 400;
-  color: var(--text);
+.navbar-logout {
   display: flex;
   align-items: center;
-  position: relative;
-  gap: 0.3rem;
-}
-.navbar-user-icon {
-  font-size: 1rem;
-  transition: transform 0.2s ease-in-out;
-
-  @media (max-width: 768px) {
-    font-size: 1.4rem;
-  }
-}
-
-.navbar-user-dropdown {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s ease, visibility 0.25s ease;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: var(--card-bg);
-  padding: 0.3rem;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
   border-radius: 0.5rem;
-  width: 100%;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+  color: var(--error-color);
+  border: 1.5px solid var(--error-color);
 }
 
-.navbar-user:hover .navbar-user-dropdown {
-  opacity: 1;
-  visibility: visible;
-}
-
-.navbar-user:hover .navbar-user-icon {
-  transform: rotate(-180deg);
+.navbar-logout:hover {
+  background-color: var(--error-color);
+  color: var(--card-bg);
 }
 
 .navbar-user-dropdown-item {
@@ -99,12 +56,88 @@
   justify-content: flex-end;
   gap: 0.5rem;
   cursor: pointer;
-  padding: 0.3rem;
+  padding: 0.4rem 0.5rem;
   border-radius: 0.5rem;
   width: 100%;
+  color: var(--text);
   text-align: right;
+  transition: background-color 0.2s ease;
+  font-size: 0.95rem;
+  background-color: var(--navbar-bg);
+}
 
-  &:hover {
-    background-color: var(--card-bg-hover);
+.navbar-user-dropdown-item :global(.theme-toggle) {
+  justify-content: flex-end;
+}
+
+.navbar-user-dropdown-item:hover {
+  background-color: var(--card-bg-hover);
+}
+
+.hamburger {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.navbar-mobile-dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.8rem;
+  background-color: var(--card-bg);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.052);
+  position: absolute;
+  top: 100%;
+  right: 1rem;
+  z-index: 1000;
+  animation: slideDown 0.25s ease;
+}
+
+.navbar-mobile-dropdown .navbar-user-dropdown-item {
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.navbar-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  width: 100%;
+  height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.9rem 1rem;
+    gap: 0.5rem;
+  }
+
+  .navbar-icon {
+    font-size: 1.6rem;
+  }
+
+  .navbar-title {
+    font-size: 1.25rem;
+    gap: 0.3rem;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

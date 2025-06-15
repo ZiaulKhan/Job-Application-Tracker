@@ -18,8 +18,11 @@ import JobAppModal from "../../components/job-apps/JobAppModal";
 import Loader from "../../components/shared/Loader/Loader";
 import { useToast } from "../../context/ToastContext";
 import Summary from "../../components/Dashboard/Summary/Summary";
+import { useAuth } from "../../context/AuthContext";
 
 const Dashboard = () => {
+  const { user } = useAuth();
+
   const form = useForm({
     resolver: yupResolver(jobAppSchema),
   });
@@ -151,19 +154,26 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard container">
-      <Summary />
-      <div className="dashboard-header flex-between">
-        <JobFilters
-          statusFilter={statusFilter}
-          sortOption={sortOption}
-          updateParam={updateParam}
-          debouncedSearchQuery={debouncedSearchQuery}
-          setDebouncedSearchQuery={setDebouncedSearchQuery}
-        />
-        <button className="btn" onClick={() => setModalType("add")}>
-          <FaPlus /> Add Job App
+      <p className="dashboard-user-name">
+        Hello, {user?.name?.split(" ")[0] || "User"}!
+      </p>
+      <div className="dashboard-header">
+        <p className="dashboard-header-title">Summary</p>
+        <Summary />
+      </div>
+      <div className="table-header flex-between">
+        <p className="dashboard-header-title">Job Applications</p>
+        <button className="btn btn-small" onClick={() => setModalType("add")}>
+          <FaPlus /> Add New
         </button>
       </div>
+      <JobFilters
+        statusFilter={statusFilter}
+        sortOption={sortOption}
+        updateParam={updateParam}
+        debouncedSearchQuery={debouncedSearchQuery}
+        setDebouncedSearchQuery={setDebouncedSearchQuery}
+      />
       {isLoading ? (
         <Loader color="var(--primary-color)" />
       ) : (

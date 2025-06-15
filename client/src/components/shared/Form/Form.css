@@ -54,10 +54,15 @@ textarea.form-input {
 
 .modal-actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row !important;
+  justify-content: center !important;
   gap: 1rem;
   justify-content: center;
   margin-top: 1.5rem;
+
+  button {
+    border: 1px solid var(--btn-bg);
+  }
 }
 
 @media (max-width: 480px) {
@@ -73,5 +78,22 @@ textarea.form-input {
 
   .toggle-password {
     font-size: 1rem;
+  }
+  .form-label {
+    font-size: 0.85rem;
+  }
+  .form-error {
+    font-size: 0.7rem;
+  }
+  .form-item {
+    margin-bottom: 0.8rem;
+  }
+  .form-input {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+  textarea.form-input {
+    font-size: 0.9rem;
+    padding: 0.5rem;
   }
 }

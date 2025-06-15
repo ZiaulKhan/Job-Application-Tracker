@@ -1,12 +1,8 @@
-.summary-container {
-  margin: 0 auto;
-}
-
 .summary-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
   gap: 1.2rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 .summary-card {
@@ -48,12 +44,6 @@
   opacity: 1;
 }
 
-.card-icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
 .summary-card h3 {
   font-size: 1rem;
   font-weight: 600;
@@ -62,7 +52,7 @@
 }
 
 .summary-card p {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 600;
   color: var(--summary-text);
   margin: 0;
@@ -107,18 +97,18 @@
 }
 
 @media (max-width: 768px) {
-  .summary-container {
-    padding: 1rem;
-  }
   .summary-cards {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(160px, 2fr));
+    gap: 0.8rem;
   }
   .summary-card {
     padding: 1rem;
   }
+  .summary-card h3 {
+    font-size: 0.9rem;
+  }
   .summary-card p {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
   .summary-chart {
     max-width: 100%;

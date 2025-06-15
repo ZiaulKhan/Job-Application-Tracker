@@ -1,36 +1,58 @@
 .dashboard {
+  width: 100%;
+  padding: 1rem;
   /* border: 1px solid red; */
-  margin-block: 1rem !important;
+}
+
+.dashboard-user-name {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
 }
 
 .dashboard-header {
-  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
 }
 
-.dashboard-title {
-  font-size: 1.3rem;
-  color: var(--text);
-  margin-bottom: 1rem;
+.dashboard-header-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.table-header {
+  margin-bottom: 0.8rem;
 }
 
 .filter-group {
   display: flex;
   gap: 0.5rem;
+  justify-content: space-between;
   align-items: center;
 }
 
-.filter-select {
-  /* padding: 0.35rem 0.5rem; */
-  padding: 0.5rem 0.5rem;
+.filter-group-left {
+  display: flex;
+  gap: 0.5rem;
+}
 
+.filter-select {
+  padding: 0.5rem 0.5rem;
   border-radius: 0.4rem;
   border: 1px solid rgba(225, 225, 225, 0.196);
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.028);
+  background-color: var(--card-bg);
   cursor: pointer;
+  color: var(--text);
+  font-weight: 500;
 }
+
 .search-input {
   width: 100%;
   min-width: 220px;
+  max-width: 300px;
   padding: 0.5rem 0.7rem;
   border-radius: 0.4rem;
   border: 1px solid rgba(225, 225, 225, 0.196);
@@ -55,7 +77,10 @@
   border-bottom: 1px solid #ddd;
   text-align: left;
   min-width: 100px;
-  max-width: 190px;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .job-table th {
@@ -101,8 +126,58 @@
   gap: 1rem;
   margin-top: 1.5rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .pagination-info {
   font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .dashboard-header {
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .dashboard-header-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .dashboard-user-name {
+    font-size: 1.4rem;
+  }
+
+  .table-header {
+    font-size: 0.8rem;
+  }
+
+  .filter-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.8rem;
+  }
+
+  .filter-group-left {
+    width: 100%;
+    gap: 0.8rem;
+  }
+
+  .filter-select,
+  .search-input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .job-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .job-table th,
+  .job-table td {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
 }

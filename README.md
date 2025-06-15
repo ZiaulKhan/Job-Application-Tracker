@@ -124,5 +124,5 @@ job-application-tracker/
 
 Author
 Made by Ziaul Khan
-Frontend: https://lighthearted-salmiakki-ce434e.netlify.app
+Frontend: https://z-job-application-tracker.netlify.app/login
 Backend: https://job-application-tracker-7aho.onrender.com/api

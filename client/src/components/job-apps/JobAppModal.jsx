@@ -42,7 +42,7 @@ const JobAppModal = ({
             </button>
             <button
               onClick={handleDelete}
-              className="btn  btn-danger"
+              className="btn "
               disabled={isLoading}
             >
               {isLoading ? "Deleting..." : "Delete"}

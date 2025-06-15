@@ -28,5 +28,9 @@ button {
 .app-container {
   flex: 1;
   margin-block: 1rem;
-  /* border: 1px solid red; */
+  padding-inline: 1.5rem;
+  @media (max-width: 768px) {
+    margin-block: 0;
+    padding-inline: 0.3rem;
+  }
 }
