@@ -1,0 +1,37 @@
+:root {
+  --bg: #f1f1f1;
+  --navbar-bg: #f1f1f1af;
+  --text: #111111;
+  --card-bg: #ffffff;
+  --card-bg-hover: #f1f1f1;
+  --input-bg: #f9f9f9;
+  --input-border: #ccc;
+  --btn-bg: #007bff;
+  --btn-hover-bg: #0056b3;
+  --error-color: #d9534f;
+  --error-color-hover: #b30000;
+  --primary-color: #007bff;
+  --primary-color-hover: #005183;
+  --btn-cancel-bg: #e0e0e0;
+  --btn-cancel-hover-bg: #e0e0e0;
+  --modal-backdrop-bg: rgba(0, 0, 0, 0.505);
+}
+
+[data-theme="dark"] {
+  --bg: #121212;
+  --navbar-bg: #12121291;
+  --text: #e0e0e0;
+  --card-bg: #1e1e1e;
+  --card-bg-hover: #2a2a2a;
+  --input-bg: #2a2a2a;
+  --input-border: #555;
+  --btn-bg: #0084dc;
+  --btn-hover-bg: #005183;
+  --error-color: #f44336;
+  --error-color-hover: #b30000;
+  --primary-color: #007bff;
+  --primary-color-hover: #005183;
+  --btn-cancel-bg: #2a2a2a;
+  --btn-cancel-hover-bg: #3a3a3a;
+  --modal-backdrop-bg: rgba(0, 0, 0, 0.64);
+}

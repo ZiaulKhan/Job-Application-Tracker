@@ -1,0 +1,97 @@
+.dashboard-header {
+  margin-bottom: 1rem;
+}
+
+.dashboard-title {
+  font-size: 1.3rem;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.filter-group {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.filter-select {
+  padding: 0.35rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.search-input {
+  width: 100%;
+  min-width: 220px;
+  padding: 0.35rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.job-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.job-table th,
+.job-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  min-width: 100px;
+  max-width: 190px;
+}
+
+.job-table th {
+  background-color: var(--card-bg);
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.status.applied {
+  background-color: #e7f3ff;
+  color: #007bff;
+}
+.status.interview {
+  background-color: #fff3cd;
+  color: #856404;
+}
+.status.rejected {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+.status.offer {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.no-jobs {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-top: 2rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  align-items: center;
+}
+
+.pagination-info {
+  font-weight: 500;
+}

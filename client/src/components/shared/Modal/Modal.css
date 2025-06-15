@@ -1,0 +1,29 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--modal-backdrop-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  border: 1px solid red;
+}
+
+.modal-content {
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  margin-bottom: 1.2rem;
+}
+
+.modal-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1;
+}
