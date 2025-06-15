@@ -2,7 +2,7 @@ import axios from "axios";
 import { getToken } from "../utils/helpers";
 
 const apiClient = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "http://localhost:8000/api",
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 apiClient.interceptors.request.use((req) => {

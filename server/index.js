@@ -16,12 +16,14 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/job-apps", authMiddleware, jobAppRoutes);
 
+const port = process.env.PORT || 8000;
+
 const startServer = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("Connected to MongoDB");
-    app.listen(process.env.PORT || 8000, () => {
-      console.log(`Server is running on port ${process.env.PORT}`);
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
     });
   } catch (error) {
     console.log(error);
