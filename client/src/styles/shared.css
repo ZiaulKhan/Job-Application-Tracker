@@ -1,0 +1,59 @@
+.btn {
+  padding: 0.58rem 1rem;
+  background-color: var(--btn-bg);
+  color: white;
+  border: none;
+  border-radius: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.btn:hover {
+  background-color: var(--btn-hover-bg);
+}
+
+.btn-danger {
+  background-color: var(--error-color);
+}
+.btn-danger:hover {
+  background-color: var(--error-color-hover);
+}
+
+.btn-small {
+  padding: 0.3rem 0.8rem !important;
+  font-size: 0.85rem;
+}
+
+.small-btn-icon {
+  font-size: 0.7rem;
+}
+
+.btn-cancel {
+  background-color: transparent;
+  color: var(--text);
+  font-weight: 500;
+  border: 2px solid var(--input-border);
+  border-radius: 0.4rem;
+}
+.btn-cancel:hover {
+  background-color: var(--btn-cancel-hover-bg);
+}
+
+.btn-close {
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.card {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
