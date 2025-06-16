@@ -54,7 +54,11 @@ const JobAppsTable = ({
                     {job.status}
                   </span>
                 </td>
-                <td>{job.notes || "NA"}</td>
+                <td title={job.notes}>
+                  {job.notes?.length > 15
+                    ? job.notes.slice(0, 15) + "..."
+                    : job.notes || "NA"}
+                </td>
                 <td>
                   <div className="flex-start">
                     <button

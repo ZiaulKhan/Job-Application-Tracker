@@ -11,12 +11,12 @@ import { useToast } from "../../../context/ToastContext";
 const Navbar = () => {
   const navigate = useNavigate();
   const { showToast } = useToast();
-  const { token, dispatch } = useAuth();
+  const { token, logout } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const handleLogout = () => {
-    dispatch({ type: "LOGOUT" });
+    logout();
     navigate("/login");
     showToast("Logged out");
   };

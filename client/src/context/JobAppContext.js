@@ -1,4 +1,3 @@
-// JobAppContext.jsx
 import React, {
   createContext,
   useContext,
@@ -13,6 +12,7 @@ import {
   deleteJobApp,
   getJobSummary,
 } from "../services/job-app-service";
+import { useAuth } from "./AuthContext";
 
 const JobAppContext = createContext();
 
@@ -35,7 +35,10 @@ export const JobAppProvider = ({ children }) => {
     totalPages: 1,
   });
 
+  const { user } = useAuth();
+
   const fetchJobApps = useCallback(async () => {
+    if (!user) return;
     setLoadingJobs(true);
     try {
       const res = await getJobApps(filters);
@@ -50,9 +53,10 @@ export const JobAppProvider = ({ children }) => {
     } finally {
       setLoadingJobs(false);
     }
-  }, [filters]);
+  }, [filters, user]);
 
   const fetchSummary = useCallback(async () => {
+    if (!user) return;
     setLoadingSummary(true);
     try {
       const res = await getJobSummary();
@@ -62,7 +66,7 @@ export const JobAppProvider = ({ children }) => {
     } finally {
       setLoadingSummary(false);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     fetchJobApps();

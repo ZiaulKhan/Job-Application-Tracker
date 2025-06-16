@@ -1,9 +1,9 @@
 import apiClient from "../utils/api-client";
 
-export const login = (payload) => {
+export const loginUser = (payload) => {
   return apiClient.post("/auth/login", payload);
 };
 
-export const register = (payload) => {
+export const registerUser = (payload) => {
   return apiClient.post("/auth/register", payload);
 };

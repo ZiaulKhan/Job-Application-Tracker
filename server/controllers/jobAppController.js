@@ -1,6 +1,6 @@
 const JobApp = require("../models/JobApp");
 
-exports.getJobApps = async (req, res) => {
+exports.getJobApps = async (req, res, next) => {
   try {
     const { status, search, sort, page = 1, limit = 10 } = req.query;
     let query = { userId: req.userId, isDeleted: false };
@@ -33,12 +33,11 @@ exports.getJobApps = async (req, res) => {
       currentPage: Number(page),
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    next(error);
   }
 };
 
-exports.createJobApp = async (req, res) => {
+exports.createJobApp = async (req, res, next) => {
   try {
     const jobApp = await JobApp.create({
       ...req.body,
@@ -47,12 +46,11 @@ exports.createJobApp = async (req, res) => {
     });
     res.status(201).json(jobApp);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Failed to create job application" });
+    next(error);
   }
 };
 
-exports.updateJobApp = async (req, res) => {
+exports.updateJobApp = async (req, res, next) => {
   try {
     const jobApp = await JobApp.findOneAndUpdate(
       { _id: req.params.id, userId: req.userId },
@@ -65,12 +63,11 @@ exports.updateJobApp = async (req, res) => {
 
     res.json(jobApp);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Failed to update job application" });
+    next(error);
   }
 };
 
-exports.deleteJobApp = async (req, res) => {
+exports.deleteJobApp = async (req, res, next) => {
   try {
     const jobApp = await JobApp.findOneAndUpdate(
       {
@@ -84,12 +81,11 @@ exports.deleteJobApp = async (req, res) => {
       return res.status(404).json({ message: "Job application not found" });
     res.json({ message: "Job application deleted" });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Failed to delete job application" });
+    next(error);
   }
 };
 
-exports.getJobSummary = async (req, res) => {
+exports.getJobSummary = async (req, res, next) => {
   const userId = req.userId;
   try {
     const jobs = await JobApp.find({ userId: userId, isDeleted: false });
@@ -110,6 +106,6 @@ exports.getJobSummary = async (req, res) => {
 
     res.status(200).json(summary);
   } catch (err) {
-    res.status(500).json({ error: "Failed to fetch summary" });
+    next(err);
   }
 };

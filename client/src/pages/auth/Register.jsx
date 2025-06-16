@@ -7,7 +7,6 @@ import InputField from "../../components/shared/Form/InputField";
 import { useEffect } from "react";
 import { getToken } from "../../utils/helpers";
 import "./Auth.css";
-import { register } from "../../services/auth-service";
 import { useToast } from "../../context/ToastContext";
 
 const RegisterPage = () => {
@@ -16,17 +15,16 @@ const RegisterPage = () => {
   });
 
   const navigate = useNavigate();
-  const { dispatch } = useAuth();
+  const { register, loading, error } = useAuth();
   const { showToast } = useToast();
 
   const onSubmit = async (data) => {
-    try {
-      const res = await register(data);
-      dispatch({ type: "LOGIN", payload: res.data });
-      navigate("/");
+    const res = await register(data);
+    if (res.success) {
       showToast("Registration successful");
-    } catch (err) {
-      showToast("Registration failed", "error");
+      navigate("/");
+    } else {
+      showToast(error || "Something went wrong", "error");
     }
   };
 
@@ -73,8 +71,8 @@ const RegisterPage = () => {
             inputProps={{ placeholder: "Enter confirm password" }}
           />
 
-          <button type="submit" className="btn">
-            Register
+          <button type="submit" className="btn" disabled={loading}>
+            {loading ? "Registering..." : "Register"}
           </button>
         </form>
       </div>

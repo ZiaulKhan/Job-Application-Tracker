@@ -5,7 +5,7 @@
   align-items: center;
   gap: 1.2rem;
   height: 100%;
-  padding: 2rem 1rem; /* Add padding for mobile spacing */
+  padding: 2rem 1rem;
 }
 
 .auth-container {
@@ -17,7 +17,6 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* Adjust font size for smaller screens */
 .auth-title {
   font-size: 1.8rem;
   font-weight: 600;
@@ -50,7 +49,6 @@
   color: var(--btn-hover-bg);
 }
 
-/* Responsive tweaks */
 @media (max-width: 768px) {
   .auth-container-wrapper {
     padding: 2rem 1rem;

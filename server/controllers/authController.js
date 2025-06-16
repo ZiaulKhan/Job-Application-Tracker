@@ -1,14 +1,7 @@
 const User = require("../models/User");
-const jwt = require("jsonwebtoken");
+const { generateToken } = require("../utils/helpers");
 
-const generateToken = (user) =>
-  jwt.sign(
-    { id: user._id, name: user.name, email: user.email },
-    process.env.JWT_SECRET,
-    { expiresIn: "7d" }
-  );
-
-exports.register = async (req, res) => {
+exports.register = async (req, res, next) => {
   const { name, email, password } = req.body;
   try {
     const user = await User.create({ name, email, password });
@@ -17,11 +10,11 @@ exports.register = async (req, res) => {
       .status(201)
       .json({ user: { name: user.name, email: user.email }, token });
   } catch (err) {
-    res.status(400).json({ error: "Registration failed", detail: err.message });
+    next(err);
   }
 };
 
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
@@ -33,6 +26,6 @@ exports.login = async (req, res) => {
       .status(200)
       .json({ user: { name: user.name, email: user.email }, token });
   } catch (err) {
-    res.status(500).json({ error: "Login failed" });
+    next(err);
   }
 };
