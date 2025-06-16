@@ -1,48 +1,52 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./Dashboard.css";
-import {
-  createJobApp,
-  deleteJobApp,
-  getJobApps,
-  updateJobApp,
-} from "../../services/job-app-service";
 import { FaPlus } from "react-icons/fa6";
 import { useSearchParams } from "react-router-dom";
-import JobFilters from "../../components/job-apps/JobAppsFilters";
-import JobAppsTable from "../../components/job-apps/JobAppsTable";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { jobAppSchema } from "../../validations/JobAppSchema";
 import { formatDateForInput } from "../../utils/helpers";
-import JobAppModal from "../../components/job-apps/JobAppModal";
-import Loader from "../../components/shared/Loader/Loader";
+
 import { useToast } from "../../context/ToastContext";
-import Summary from "../../components/Dashboard/Summary/Summary";
 import { useAuth } from "../../context/AuthContext";
+import { useJobApp } from "../../context/JobAppContext";
+
+import JobFilters from "../../components/job-apps/JobAppsFilters";
+import JobAppsTable from "../../components/job-apps/JobAppsTable";
+import JobAppModal from "../../components/job-apps/JobAppModal";
+import Summary from "../../components/Dashboard/Summary/Summary";
+import Loader from "../../components/shared/Loader/Loader";
 
 const Dashboard = () => {
   const { user } = useAuth();
+  const { showToast } = useToast();
+  const {
+    jobApps,
+    pagination,
+    fetchJobApps,
+    addJobApp,
+    editJobApp,
+    removeJobApp,
+    loadingJobs,
+    setFilters,
+  } = useJobApp();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [modalType, setModalType] = useState(null);
+  const [modalActionLoading, setModalActionLoading] = useState(false);
+  const [selectedJobApp, setSelectedJobApp] = useState(null);
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(
+    searchParams.get("search") || ""
+  );
 
   const form = useForm({
     resolver: yupResolver(jobAppSchema),
   });
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
   const statusFilter = searchParams.get("status") || "all";
   const sortOption = searchParams.get("sort") || "latest";
   const searchQuery = searchParams.get("search") || "";
   const page = Number(searchParams.get("page")) || 1;
-
-  const [jobApps, setJobApps] = useState([]);
-  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
-  const [totalPages, setTotalPages] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [modalType, setModalType] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [selectedJobApp, setSelectedJobApp] = useState(null);
-
-  const { showToast } = useToast();
 
   const updateParam = useCallback(
     (key, value) => {
@@ -76,43 +80,29 @@ const Dashboard = () => {
     return () => clearTimeout(timer);
   }, [debouncedSearchQuery, updateParam]);
 
-  const fetchJobs = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const res = await getJobApps({
-        status: statusFilter,
-        sort: sortOption,
-        search: searchQuery,
-        page,
-      });
-      setJobApps(res.data.data);
-      setTotalPages(res.data.totalPages);
-      setCurrentPage(res.data.currentPage);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [statusFilter, sortOption, searchQuery, page]);
-
   useEffect(() => {
-    fetchJobs();
-  }, [statusFilter, sortOption, searchQuery, page, fetchJobs]);
+    setFilters({
+      status: statusFilter,
+      sort: sortOption,
+      search: searchQuery,
+      page,
+    });
+  }, [statusFilter, sortOption, searchQuery, page, setFilters]);
 
   const handleSubmit = async (data) => {
+    setModalActionLoading(true);
     try {
-      setIsLoading(true);
       if (modalType === "add") {
-        await createJobApp(data);
+        await addJobApp(data);
       } else if (modalType === "edit") {
-        await updateJobApp(selectedJobApp._id, data);
+        await editJobApp(selectedJobApp._id, data);
       }
       showToast(
         `Job application ${
           modalType === "add" ? "added" : "updated"
         } successfully`
       );
-      fetchJobs();
+      fetchJobApps();
     } catch (err) {
       showToast(
         `Error ${modalType === "add" ? "adding" : "updating"} job application`,
@@ -121,22 +111,22 @@ const Dashboard = () => {
       console.error(err);
     } finally {
       handleCloseModal();
-      setIsLoading(false);
+      setModalActionLoading(false);
     }
   };
 
   const handleDelete = async () => {
+    setModalActionLoading(true);
     try {
-      setIsLoading(true);
-      await deleteJobApp(selectedJobApp._id);
+      await removeJobApp(selectedJobApp._id);
       showToast("Job application deleted successfully");
-      fetchJobs();
+      fetchJobApps();
     } catch (err) {
       showToast("Error deleting job application", "error");
       console.error(err);
     } finally {
       handleCloseModal();
-      setIsLoading(false);
+      setModalActionLoading(false);
     }
   };
 
@@ -157,16 +147,19 @@ const Dashboard = () => {
       <p className="dashboard-user-name">
         Hello, {user?.name?.split(" ")[0] || "User"}!
       </p>
+
       <div className="dashboard-header">
         <p className="dashboard-header-title">Summary</p>
         <Summary />
       </div>
+
       <div className="table-header flex-between">
         <p className="dashboard-header-title">Job Applications</p>
         <button className="btn btn-small" onClick={() => setModalType("add")}>
           <FaPlus /> Add New
         </button>
       </div>
+
       <JobFilters
         statusFilter={statusFilter}
         sortOption={sortOption}
@@ -174,24 +167,27 @@ const Dashboard = () => {
         debouncedSearchQuery={debouncedSearchQuery}
         setDebouncedSearchQuery={setDebouncedSearchQuery}
       />
-      {isLoading ? (
-        <Loader color="var(--primary-color)" />
+
+      {loadingJobs ? (
+        <div className="loader-wrapper">
+          <Loader color="var(--primary-color)" />
+        </div>
       ) : (
         <JobAppsTable
           jobApps={jobApps}
-          totalPages={totalPages}
-          currentPage={currentPage}
+          pagination={pagination}
           updateParam={updateParam}
           setSelectedJobApp={setSelectedJobApp}
           setModalType={setModalType}
         />
       )}
+
       <JobAppModal
         modalType={modalType}
         handleCloseModal={handleCloseModal}
         handleSubmit={handleSubmit}
         form={form}
-        isLoading={isLoading}
+        isLoading={modalActionLoading}
         selectedJobAppCompany={selectedJobApp?.company}
         handleDelete={handleDelete}
       />

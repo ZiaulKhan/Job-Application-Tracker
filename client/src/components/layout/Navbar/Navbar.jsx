@@ -42,11 +42,13 @@ const Navbar = () => {
           />
         )}
 
-        {!isMobile && token && (
+        {!isMobile && (
           <>
-            <p className="navbar-logout" onClick={handleLogout}>
-              <BiLogOutCircle /> Logout
-            </p>
+            {token && (
+              <p className="navbar-logout" onClick={handleLogout}>
+                <BiLogOutCircle /> Logout
+              </p>
+            )}
             <ThemeToggle />
           </>
         )}

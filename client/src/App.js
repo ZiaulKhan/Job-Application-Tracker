@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { ToastProvider } from "./context/ToastContext";
 import "./styles/toast.css";
 import NotFound from "./pages/NotFound/NotFound";
+import { JobAppProvider } from "./context/JobAppContext";
 
 function App() {
   useEffect(() => {
@@ -18,43 +19,33 @@ function App() {
   }, []);
 
   return (
-    <AuthProvider>
-      <ToastProvider>
-        <Router>
-          <div className="layout-container">
-            <Navbar />
-            <div className="app-container">
-              <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route
-                  path="/"
-                  element={
-                    <ProtectedRoute>
-                      <Dashboard />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/add-job"
-                  element={
-                    <ProtectedRoute>{/* <AddJobPa /> */}</ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/edit-job/:id"
-                  element={
-                    <ProtectedRoute>{/* <EditJobPage /> */}</ProtectedRoute>
-                  }
-                />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+    <Router>
+      <AuthProvider>
+        <ToastProvider>
+          <JobAppProvider>
+            <div className="layout-container">
+              <Navbar />
+              <div className="app-container">
+                <Routes>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route
+                    path="/"
+                    element={
+                      <ProtectedRoute>
+                        <Dashboard />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </div>
+              <Footer />
             </div>
-            <Footer />
-          </div>
-        </Router>
-      </ToastProvider>
-    </AuthProvider>
+          </JobAppProvider>
+        </ToastProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 

@@ -1,27 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Summary.css";
-import { getJobSummary } from "../../../services/job-app-service";
+import { useJobApp } from "../../../context/JobAppContext";
 
 const Summary = () => {
-  const [summary, setSummary] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { summary, loadingSummary } = useJobApp();
 
-  useEffect(() => {
-    const fetchSummary = async () => {
-      setLoading(true);
-      try {
-        const res = await getJobSummary();
-        setSummary(res.data);
-      } catch (err) {
-        console.error("Failed to fetch summary:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchSummary();
-  }, []);
-
-  if (loading) {
+  if (loadingSummary) {
     return (
       <div className="summary-cards">
         {[...Array(5)].map((_, idx) => (
@@ -82,4 +66,5 @@ const Summary = () => {
     </div>
   );
 };
+
 export default Summary;

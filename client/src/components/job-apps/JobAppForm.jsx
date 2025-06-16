@@ -3,6 +3,7 @@ import InputField from "../shared/Form/InputField";
 import SelectField from "../shared/Form/SelectField";
 import DatePickerField from "../shared/Form/DatePickerField";
 import TextAreaField from "../shared/Form/TextAreaField";
+import Loader from "../shared/Loader/Loader";
 
 const JobAppForm = ({ form, onSubmit, isSubmitting, onClose }) => {
   return (
@@ -56,7 +57,14 @@ const JobAppForm = ({ form, onSubmit, isSubmitting, onClose }) => {
           Cancel
         </button>
         <button type="submit" className="btn">
-          {isSubmitting ? "Saving..." : "Save"}
+          {isSubmitting ? (
+            <div className="flex-center">
+              <Loader color="#fff" size="1rem" />
+              Saving...
+            </div>
+          ) : (
+            "Save"
+          )}
         </button>
       </div>
     </form>

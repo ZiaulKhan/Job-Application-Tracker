@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "../shared/Modal/Modal";
 import JobAppForm from "./JobAppForm";
+import Loader from "../shared/Loader/Loader";
 
 const JobAppModal = ({
   modalType,
@@ -11,6 +12,7 @@ const JobAppModal = ({
   selectedJobAppCompany,
   handleDelete,
 }) => {
+  // console.log(isLoading);
   return (
     <Modal
       title={
@@ -45,7 +47,14 @@ const JobAppModal = ({
               className="btn "
               disabled={isLoading}
             >
-              {isLoading ? "Deleting..." : "Delete"}
+              {isLoading ? (
+                <div className="flex-center">
+                  <Loader color="#fff" size="1rem" />
+                  Deleting...
+                </div>
+              ) : (
+                "Delete"
+              )}
             </button>
           </div>
         </div>

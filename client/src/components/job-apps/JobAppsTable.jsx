@@ -3,12 +3,13 @@ import { FaPen, FaTrash } from "react-icons/fa6";
 
 const JobAppsTable = ({
   jobApps,
-  totalPages,
-  currentPage,
+  pagination,
   updateParam,
   setSelectedJobApp,
   setModalType,
 }) => {
+  const { totalPages, currentPage } = pagination;
+
   if (jobApps.length === 0) {
     return <p className="no-jobs">No jobs found</p>;
   }

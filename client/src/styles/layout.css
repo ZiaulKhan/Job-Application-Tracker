@@ -34,3 +34,10 @@
 .rounded-full {
   border-radius: 50%;
 }
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}

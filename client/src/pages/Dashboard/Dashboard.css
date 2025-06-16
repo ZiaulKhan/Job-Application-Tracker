@@ -1,7 +1,13 @@
 .dashboard {
   width: 100%;
   padding: 1rem;
-  /* border: 1px solid red; */
+}
+
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem;
 }
 
 .dashboard-user-name {
@@ -18,7 +24,7 @@
 }
 
 .dashboard-header-title {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 500;
 }
 
@@ -131,6 +137,13 @@
 
 .pagination-info {
   font-weight: 500;
+}
+
+@media (max-width: 940px) {
+  .job-table {
+    display: block;
+    overflow-x: auto;
+  }
 }
 
 @media (max-width: 768px) {

@@ -55,9 +55,7 @@ textarea.form-input {
 .modal-actions {
   display: flex;
   flex-direction: row !important;
-  justify-content: center !important;
   gap: 1rem;
-  justify-content: center;
   margin-top: 1.5rem;
 
   button {
