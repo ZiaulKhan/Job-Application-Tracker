@@ -124,5 +124,5 @@ job-application-tracker/
 
 Author
 Made by Ziaul Khan
-Frontend: https://z-job-application-tracker.netlify.app/login
+Frontend: https://z-job-application-tracker.netlify.app
 Backend: https://job-application-tracker-7aho.onrender.com/api
